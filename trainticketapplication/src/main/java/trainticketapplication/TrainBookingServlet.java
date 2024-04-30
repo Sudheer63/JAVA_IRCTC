@@ -133,7 +133,6 @@ public class TrainBookingServlet extends HttpServlet {
 	            conn.close();
 
 	            response.getWriter().println("Ticket details inserted successfully. PNR: " + pnr);
-//	            response.sendRedirect("TicketServlet?pnr=" + pnr);
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -225,18 +224,6 @@ public class TrainBookingServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		 String source = request.getParameter("source");
-	        String destination = request.getParameter("destination");
-	        String train_name = request.getParameter("trains");
-	        String travelDate = request.getParameter("traveldate");
-	        String coach = request.getParameter("coach");
-	        String[] names = request.getParameterValues("nm");
-	        String[] gender = request.getParameterValues("gen");
-	        String[] age = request.getParameterValues("ag");
-	        String[] berth = request.getParameterValues("br");
-
-	       
 	     
 	        doGet(request,response);
 	}

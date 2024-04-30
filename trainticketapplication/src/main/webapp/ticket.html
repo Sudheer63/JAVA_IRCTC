@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Information</title>
+    <style>
+        /* Your CSS styles */
+        body {
+            background-image: url("https://t4.ftcdn.net/jpg/04/67/57/95/360_F_467579559_vP6h1IGQkZw7ndka60cjloSl0HFvTNIn.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px;
+            padding: 40px;
+            background-color: lightgreen;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        p {
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid lightgreen;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Ticket Information</h1>
+        <!-- Replace dynamic values with placeholders or actual data if available -->
+        <p>Ticket Number: <!-- Insert ticket number here --></p>
+        <p>Departure: <!-- Insert departure city here --></p>
+        <p>Destination: <!-- Insert destination city here --></p>
+        <p>Train: <!-- Insert train name here --></p>
+        <p>Date: <!-- Insert travel date here --></p>
+        <p>Travel Class: <!-- Insert travel class here --></p>
+        <h2>Passenger Details</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Seat Preference</th>
+            </tr>
+            <!-- Replace with actual passenger data if available -->
+            <!-- Example:
+            <tr>
+                <td>Passenger Name</td>
+                <td>Age</td>
+                <td>Gender</td>
+                <td>Seat Preference</td>
+            </tr>
+            -->
+        </table>
+        <h5>Fare for each Passenger: <!-- Insert base fare here --></h5>
+        <h2>Total Fare is: <!-- Insert total fare here --></h2>
+    </div>
+</body>
+ <script>
+        $(document).ready(function() {
+            // Perform AJAX call using jQuery
+            $.ajax({
+                url: 'TicketServlet',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    populateTable(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching data:', textStatus, errorThrown);
+                }
+            });
+
+            // Function to populate the table with data
+            function populateTable(data) {
+                const ticketBody = $('#ticketBody');
+                ticketBody.empty(); // Clear existing rows
+
+                data.forEach(ticket => {
+                    const row = $('<tr></tr>');
+                    ticket.forEach(value => {
+                        const cell = $('<td></td>').text(value);
+                        row.append(cell);
+                    });
+                    ticketBody.append(row);
+                });
+            }
+        });
+    </script>
+</html>
